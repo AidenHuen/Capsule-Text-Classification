@@ -12,6 +12,11 @@ def to_categorical(labels):
     y = np.array(y)
     return y
 
+def get_Y(path):
+    data = pandas.read_csv(path,sep="\t")
+    y = to_categorical(data.label.values)
+    return y
+
 def build_XY(path,vocab,output_path):
     """
     读取path路径下的CSV数据，利用vocab词典构建numpy数据集，并保存至output_path
@@ -35,6 +40,14 @@ def build_XY(path,vocab,output_path):
     print(x)
     print(y)
     pickle.dump((x, y), open(output_path,"wb"))
+
+
+
+def load_dataset():
+    x_train, y_train = pickle.load(open(config.train_pk, "rb"))
+    x_dev, y_dev = pickle.load(open(config.dev_pk,"rb"))
+    embedding = pickle.load(open(config.word_embed_pk,"rb"))
+    return x_train, y_train, x_dev, y_dev, embedding
 
 vocab = pickle.load(open(config.voc_pk,"rb"))
 build_XY(config.train_path, vocab, config.train_pk)
