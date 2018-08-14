@@ -1,2 +1,2 @@
 # Capsule-Text-Classification
-capsule-based model including RNN and CNN with Keras
+capsule-based model including RNN、CNN and HAN with Keras
